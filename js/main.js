@@ -1,6 +1,18 @@
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 let lang='en', tab=0;
+const carousel=$('.shots');
+const slides=$$('.slide',carousel);
+let currentSlide=0;
+
+function showSlide(index){
+  currentSlide=(index+slides.length)%slides.length;
+  $('.slides',carousel).style.transform=`translateX(-${currentSlide*100}%)`;
+  slides.forEach((slide,i)=>slide.setAttribute('aria-hidden',String(i!==currentSlide)));
+}
+
+$('.prev',carousel).addEventListener('click',()=>showSlide(currentSlide-1));
+$('.next',carousel).addEventListener('click',()=>showSlide(currentSlide+1));
 
 // 1. Render text for the current language (no page reload)
 function render(){

@@ -486,31 +486,59 @@ h2 small {
 }
 
 .shots {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #fff;
     margin-block-end: 2rem
 }
 
-.shot {
-    aspect-ratio: 16/10;
-    border: 1px dashed var(--line);
-    display: grid;
-    place-content: center;
-    text-align: center;
-    color: var(--mut);
-    font-size: .85rem;
-    gap: .3rem;
-    overflow: hidden;
-    position: relative
+.slides {
+    display: flex;
+    direction: ltr;
+    transition: transform .5s cubic-bezier(.2, .7, .2, 1)
 }
 
-.shot img {
-    position: absolute;
-    inset: 0;
+.slide {
+    flex: 0 0 100%;
+    height: clamp(220px, 55vw, 560px);
+    overflow: hidden;
+    background: #fff
+}
+
+.shot {
+    display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover
+    object-fit: contain
+}
+
+.slide-arrow {
+    position: absolute;
+    top: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    border-radius: 50%;
+    background: #0e1230b3;
+    color: #fff;
+    font: inherit;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    transform: translateY(-50%)
+}
+
+.slide-arrow:hover {
+    background: var(--acc)
+}
+
+.slide-arrow.prev {
+    left: 1rem
+}
+
+.slide-arrow.next {
+    right: 1rem
 }
 
 .svc {
@@ -623,8 +651,7 @@ h1.r.in .line b {
     }
 
     .two,
-    .svc,
-    .shots {
+    .svc {
         grid-template-columns: 1fr
     }
 
